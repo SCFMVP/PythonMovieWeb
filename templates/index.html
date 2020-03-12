@@ -1,0 +1,14 @@
+$def with (movies)
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Move Site</title>
+</head>
+<body>
+<h1>Later's Movie Site</h1>
+    $for movie in movies:
+        <li>
+        $movie['title'], $movie['year'], $movie['country'], $movie['abstract']
+        </li>
+</body>
+</html>
