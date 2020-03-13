@@ -1,9 +1,10 @@
 # coding:utf8
 import web
 import pymysql
-
+'''
 # MySql
 con = pymysql.connect(dbn='mysql', host='localhost', user='root', pw='root', db='moviesite', charset='utf8')
+'''
 # SQLite
 db = web.database(
     dbn='mysql',
