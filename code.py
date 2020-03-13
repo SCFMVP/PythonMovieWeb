@@ -2,11 +2,12 @@
 import web
 import pymysql
 from web.template import ALLOWED_AST_NODES
+
 ALLOWED_AST_NODES.append('Constant')
 
 render = web.template.render('templates/')
 # MySql-以List形式输出
-db = pymysql.connect("localhost", "root", "root", "moviesite",  cursorclass=pymysql.cursors.DictCursor)
+db = pymysql.connect("localhost", "root", "root", "moviesite", cursorclass=pymysql.cursors.DictCursor)
 cursor = db.cursor()
 
 urls = (
@@ -20,6 +21,14 @@ class index:
         cursor.execute("select * from movie")
         movies = cursor.fetchall()
         print(movies)
+        return render.index(movies)
+
+    def POST(self):
+        data = web.input()
+        condition = r'title like "%' + data.title + r'%"'
+        print("select * from movie where %s" % condition)
+        cursor.execute("select * from movie where %s" % condition)
+        movies = cursor.fetchall()
         return render.index(movies)
 
 

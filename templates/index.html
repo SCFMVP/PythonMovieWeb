@@ -5,11 +5,15 @@ $def with (movies)
     <title>Move Site</title>
 </head>
 <body>
-<h1>Later's Movie Site</h1>
-<p>影片列表：</p>
-$for movie in movies:
-    <li>
-    <a href="movie/$movie['id']">$movie['title']</a>
-    </li>
+    <form action="/" method="post">
+        <input type="text" name="title" />
+        <input type="submit" value="搜索" />
+    </form>
+    <h1>Later's Movie Site</h1>
+    <p>影片列表：</p>
+    $for movie in movies:
+        <li>
+        <a href="movie/$movie['id']">$movie['title']</a>
+        </li>
 </body>
 </html>
