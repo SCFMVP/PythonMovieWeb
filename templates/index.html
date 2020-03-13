@@ -6,9 +6,10 @@ $def with (movies)
 </head>
 <body>
 <h1>Later's Movie Site</h1>
-    $for movie in movies:
-        <li>
-        $movie['title'], $movie['year'], $movie['country'], $movie['abstract']
-        </li>
+<p>影片列表：</p>
+$for movie in movies:
+    <li>
+    <a href="movie/$movie['id']">$movie['title']</a>
+    </li>
 </body>
 </html>

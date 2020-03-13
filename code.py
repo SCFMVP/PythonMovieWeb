@@ -7,11 +7,11 @@ ALLOWED_AST_NODES.append('Constant')
 render = web.template.render('templates/')
 # MySql-以List形式输出
 db = pymysql.connect("localhost", "root", "root", "moviesite",  cursorclass=pymysql.cursors.DictCursor)
-# 使用 cursor() 方法创建一个游标对象 cursor
 cursor = db.cursor()
 
 urls = (
-    '/', 'index'
+    '/', 'index',
+    '/movie/(\d+)', 'movie',
 )
 
 
@@ -21,6 +21,15 @@ class index:
         movies = cursor.fetchall()
         print(movies)
         return render.index(movies)
+
+
+class movie:
+    def GET(self, movie_id):
+        movie_id = int(movie_id)
+        cursor.execute("select * from movie where id=%s" % movie_id)
+        movie = cursor.fetchall()[0]
+        #movie = db.select('movie', where='id=$movie_id', vars=locals())[0]
+        return render.movie(movie)
 
 
 if __name__ == "__main__":
