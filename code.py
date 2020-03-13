@@ -28,7 +28,6 @@ class movie:
         movie_id = int(movie_id)
         cursor.execute("select * from movie where id=%s" % movie_id)
         movie = cursor.fetchall()[0]
-        #movie = db.select('movie', where='id=$movie_id', vars=locals())[0]
         return render.movie(movie)
 
 
