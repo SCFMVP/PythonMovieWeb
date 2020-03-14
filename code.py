@@ -36,7 +36,9 @@ class movie:
     def GET(self, movie_id):
         movie_id = int(movie_id)
         cursor.execute("select * from movie where id=%s" % movie_id)
+        # 只返回一条数据
         movie = cursor.fetchall()[0]
+        print(movie)
         return render.movie(movie)
 
 

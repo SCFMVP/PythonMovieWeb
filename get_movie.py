@@ -3,7 +3,6 @@ import json
 import time
 from urllib.request import Request
 import pymysql
-import web
 
 # 连接数据库
 db = pymysql.connect("localhost", "root", "root", "moviesite")
