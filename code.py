@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 import web
 import pymysql
-from web.template import ALLOWED_AST_NODES
 
+from web.template import ALLOWED_AST_NODES
 ALLOWED_AST_NODES.append('Constant')
 
 render = web.template.render('templates/')
