@@ -13,6 +13,8 @@ cursor = db.cursor()
 urls = (
     '/', 'index',
     '/movie/(\d+)', 'movie',
+    '/cast/(.*)', 'cast',
+    '/director/(.*)', 'director',
 )
 
 
@@ -40,6 +42,22 @@ class movie:
         movie = cursor.fetchall()[0]
         print(movie)
         return render.movie(movie)
+
+
+class cast:
+    def GET(self, cast_name):
+        condition = r'casts like "%' + cast_name + r'%"'
+        cursor.execute("select * from movie where %s" % condition)
+        movies = cursor.fetchall()
+        return render.index(movies)
+
+
+class director:
+    def GET(self, director_name):
+        condition = r'directors like "%' + director_name + r'%"'
+        cursor.execute("select * from movie where %s" % condition)
+        movies = cursor.fetchall()
+        return render.index(movies)
 
 
 if __name__ == "__main__":
