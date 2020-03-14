@@ -22,8 +22,9 @@ class index:
     def GET(self):
         cursor.execute("select * from movie")
         movies = cursor.fetchall()
-        print(movies)
-        return render.index(movies)
+        cursor.execute('SELECT COUNT(*) AS COUNT FROM movie')
+        count = cursor.fetchall()[0]['COUNT']
+        return render.index(movies, count, None)
 
     def POST(self):
         data = web.input()
@@ -31,7 +32,10 @@ class index:
         print("select * from movie where %s" % condition)
         cursor.execute("select * from movie where %s" % condition)
         movies = cursor.fetchall()
-        return render.index(movies)
+        #查询数量
+        cursor.execute('SELECT COUNT(*) AS COUNT FROM movie WHERE ' + condition)
+        count = cursor.fetchall()[0]['COUNT']
+        return render.index(movies, count, data.title)
 
 
 class movie:
@@ -49,7 +53,9 @@ class cast:
         condition = r'casts like "%' + cast_name + r'%"'
         cursor.execute("select * from movie where %s" % condition)
         movies = cursor.fetchall()
-        return render.index(movies)
+        cursor.execute('SELECT COUNT(*) AS COUNT FROM movie WHERE ' + condition)
+        count = cursor.fetchall()[0]['COUNT']
+        return render.index(movies, count, cast_name)
 
 
 class director:
@@ -57,7 +63,9 @@ class director:
         condition = r'directors like "%' + director_name + r'%"'
         cursor.execute("select * from movie where %s" % condition)
         movies = cursor.fetchall()
-        return render.index(movies)
+        cursor.execute('SELECT COUNT(*) AS COUNT FROM movie WHERE ' + condition)
+        count = cursor.fetchall()[0]['COUNT']
+        return render.index(movies, count, director_name)
 
 
 if __name__ == "__main__":
